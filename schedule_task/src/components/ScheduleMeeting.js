@@ -21,6 +21,9 @@ const ScheduleMeeting = () => {
     const [selectionCriteria, setSelectionCriteria] = useState('field');
     const [areaOfInterests, setAreaOfInterests] = useState([]);
     const [scheduleTime, setScheduleTime] = useState(dayjs('2022-04-17T15:30'));
+    const token = localStorage.getItem('authtoken');
+    const studentId = localStorage.getItem('id');
+    console.log(token);
 
     useEffect(() => {
         const fetchAreaOfInterests = async () => {
@@ -87,7 +90,7 @@ const ScheduleMeeting = () => {
         try {
             const mentor = selectionCriteria==='mentor' ? selectedMentor : ''; 
             await axios.post('/api/schedule', {
-                studentId: 'student-id', // Example student ID
+                studentId, // Example student ID
                 mentorId: mentor,
                 selectedField: selectedAreaOfInterest,
                 duration,

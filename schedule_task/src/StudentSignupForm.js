@@ -31,6 +31,8 @@ const StudentSignupForm = () => {
 
         try {
             const response = await axios.post('http://localhost:3000/student/signup', formData);
+            localStorage.setItem('authtoken', response.data.token);
+            localStorage.setItem('id', response.data.students.student_id);
             console.log('Signup successful:', response.data);
             navigate('/schedulemeeting');
             // Handle success (e.g., redirect to login page)

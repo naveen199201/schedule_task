@@ -30,6 +30,8 @@ const MentorLoginForm = () => {
 
         try {
             const response = await axios.post('http://localhost:3000/mentor/login', formData);
+            localStorage.setItem('authtoken', response.data.token);
+            localStorage.setItem('id', response.data.mentor.mentor_id);
             console.log('Login successful:', response.data);
             navigate('/mentoravailability'); // Navigate to the mentor dashboard
         } catch (err) {
