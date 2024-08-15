@@ -252,6 +252,29 @@ app.get('/available-mentors', async (req, res) => {
     }
 });
 
+app.get('/areas-of-interest', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT DISTINCT area_of_interest FROM mentors');
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching areas of interest:', error);
+        res.status(500).json({ error: 'An error occurred while fetching areas of interest.' });
+    }
+});
+
+app.get('/areas-of-interest/:selectedAreaOfInterest', async (req, res) => {
+    const { selectedAreaOfInterest } = req.params
+    console.log(selectedAreaOfInterest)
+    try {
+        const result = await pool.query("SELECT name FROM mentors WHERE area_of_interest=$1",[selectedAreaOfInterest]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching areas of interest:', error);
+        res.status(500).json({ error: 'An error occurred while fetching areas of interest.' });
+    }
+});
+
+
 // Endpoint to get available mentors for a given area of interest
 app.get('/mentorss', async (req, res) => {
   const { areaOfInterest } = req.query;

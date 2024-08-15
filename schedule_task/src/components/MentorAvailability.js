@@ -33,7 +33,8 @@ const MentorAvailability = () => {
     }, [mentorId]);
 
     const handleDateSelect = (selectInfo) => {
-        let title = prompt('Enter a title for this time slot (e.g., "Available")');
+        let title = 'Available';
+        // let title = prompt('Enter a title for this time slot (e.g., "Available")');
         let calendarApi = selectInfo.view.calendar;
 
         calendarApi.unselect(); // Clear the selection
@@ -96,6 +97,7 @@ const MentorAvailability = () => {
                     }}
                     initialView="timeGridWeek"
                     editable={true}
+                    firstDay={1}
                     selectable={true}
                     selectMirror={true}
                     dayMaxEvents={true}
